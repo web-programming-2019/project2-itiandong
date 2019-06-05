@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}<center>
+<h1>你好！{{ name }}</h1>
+    <div class="chat-panel">
+
+    {% for button in buttons %}
+        {% if button[2] %}
+            <a role="button" class="btn btn-primary" href="{{ url_for(button[0]) }}">{{ button[1] }}</a>
+        {% else %}
+            <a role="button" class="btn btn-secondary" href="{{ url_for(button[0]) }}">{{ button[1] }}</a>
+        {% endif %}
+    {% endfor %}
+    </center>
+    </div>
+
+
+    <h5>一共有 {{ channel_infos|length }} 个频道：
+    </h5>
+
+    <div class="container">
+    <div class="list-group">
+        {% for channel in channel_infos %}
+            <a href="{{ url_for('channel', c_name=channel[0]) }}" class="list-group-item d-flex justify-content-between align-items-center">{{ channel[0] }} <span class="badge badge-primary badge-pill">{{ channel[1] }}</span> </a>
+
+        {% endfor %}
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+    <ul id="channel-list">
+    {% for channel in channel_names %}
+        <li><a href="{{ url_for('channel', c_name=channel[0]) }}">{{ channel[0] }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}
