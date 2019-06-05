@@ -133,12 +133,15 @@ def quit():
 
 @socketio.on("msg")
 def on_receive_msg(data):
+    from urllib.parse import unquote, quote
     user = session.get('name')
-    c_name = data['channel_name']
-    content = data['content']
+    c_name = unquote(data['channel_name'])
+    content = unquote(data['content'])
     channel = channels[c_name]
-    while (len(channel[1]) >= 100):
+    while len(channel[1]) >= 100:
         del(channel[1][0])
+
+    print("***********8"+content)
 
     data['user'] = user
     data['time'] = get_time()

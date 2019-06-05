@@ -10,7 +10,7 @@
 
 {% block content %}
     <h1>创建者：{{ channel[0] }} </h1>
-    <input id="msg_content" type="text" class="form-control"/><br />
+    <input id="msg_content" type="text" class="form-control" placeholder="输入您想说的话"/><br />
     <button id="send_msg" class="btn btn-primary">Send</button>
     <a class="btn btn-primary" href="{{ url_for('quit') }}">Quit</a>
     <br />

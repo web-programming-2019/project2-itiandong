@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     // 获取当前 channel 名（就想到这种不是很优美的方案）
     // TODO: 隐含着频道名不能含有 /
-    var channel_name = window.location.pathname.split('/')[2]
+    var channel_name = window.location.pathname.split('/')[2];
 
-    console.log(location.protocol + '//' + document.domain + ':' + location.port)
+    console.log(location.protocol + '//' + document.domain + ':' + location.port);
 
     // When connected, configure buttons
     socket.on('connect', () => {
@@ -16,9 +16,10 @@ document.addEventListener('DOMContentLoaded',()=>{
         document.querySelector('#send_msg').onclick = () =>{
 
             const content = document.querySelector('#msg_content').value;
+            console.log("发送的：" + content);
             socket.emit('msg', {
                 'channel_name':channel_name,
-                'content':content
+                'content':encodeURI(content)
             });
 
             document.querySelector('#channel-number').innerHTML =
@@ -44,7 +45,8 @@ document.addEventListener('DOMContentLoaded',()=>{
         a.className = "list-group-item list-group-item-action flex-column";
         a.innerHTML = '<div class="d-flex w-100 justify-content-between">'        +
                         `<h5 class="mb-1 text-success">${user} <small>(${time})</small> :</h5></div>`      +
-                        `<p class="mb-1">${content}</p>`;
+                        `<p class="mb-1">${decodeURI(content)}</p>`;
         document.querySelector('#msgs').append(a)
+        console.log(content)
     });
 });
