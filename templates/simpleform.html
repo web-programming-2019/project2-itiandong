@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hello">
+        <div class="hello-form">
+            <form action="{{ action }}" method="post" class="form" role="form">
+
+                <div class="form-group required">
+                    <label class="form-control-label" for="val">{{ input[0] }}</label>
+                    <input class="form-control" id="username" name="val" required="" type="text" value="" placeholder="{{ input[1] }}">
+                </div>
+
+                <center><input class="btn btn-primary" id="submit" name="submit" type="submit" value="{{ button_val }}"></center>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

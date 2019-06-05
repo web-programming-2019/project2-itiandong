@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block addition_header %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
+{% endblock %}
+
+{% block addition_script %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/channel.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    <h1>创建者：{{ channel[0] }} </h1>
+    <input id="msg_content" type="text" class="form-control"/><br />
+    <button id="send_msg" class="btn btn-primary">Send</button>
+    <a class="btn btn-primary" href="{{ url_for('quit') }}">Quit</a>
+    <br />
+    <h5>一共有 <span id="channel-number">{{ channel[1]|length }}</span> 条消息：
+    </h5>
+    <br />
+    <div class="list-group" id="msgs">
+        {% for msg in channel[1] %}
+            <a class="list-group-item list-group-item-action flex-column">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1 text-success">{{ msg[0] }} <small>({{ msg[1] }})</small> :</h5>
+                    {% if name == msg[0] %}
+                        <small>您的消息</small>
+                    {% endif %}
+                </div>
+                <p class="mb-1">{{ msg[2] }}</p>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

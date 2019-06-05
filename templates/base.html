@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Chat Room{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+    {% block addition_header %}{% endblock %}
+</head>
+<body>
+
+<main class="container">
+    <header>
+        <h1 class="text-center display-4">
+            <a href="{{ url_for('index') }}" class="text-success"><strong>J\Chat</strong></a>
+            <small class="text-muted sub-title">Let's talk !!!!</small>
+        </h1>
+    </header>
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% block content %}{% endblock %}
+    <footer class="text-center">
+        {% block footer %}
+            <small> &copy; 2019 <a href="http://itiandong.com" title="Written by Itiadnong">Itiandong</a>
+            </small>
+        {% endblock %}
+    </footer>
+</main>
+
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.slim.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+{% block addition_script %}{% endblock %}
+</body>
+</html>
